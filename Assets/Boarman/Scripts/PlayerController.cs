@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    int speed = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +15,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        System.out.println("Boobs")
+        
+         transform.Translate(Vector3.left * speed * Time.deltaTime);
+
+    if (transform.position.x <= -4)
+    {
+        transform.Translate(Vector3.right * speed * Time.deltaTime);
+        Debug.Log("Working!");
+    }
 
     }
 }
