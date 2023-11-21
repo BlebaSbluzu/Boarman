@@ -10,15 +10,15 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
 
 
-    public static int speed = 10;
+    public static int speed = 15;
     public int speedHandler()
     {
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
-            if (speed == 30)
+            if (speed == 50)
             {
-                speed = 30;
+                speed = 50;
             }
             else
             {
