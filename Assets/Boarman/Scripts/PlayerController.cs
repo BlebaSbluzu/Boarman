@@ -1,28 +1,62 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    int speed = 10;
+    private float turnspeed = 45.0f;
+    private float horizontalInput;
 
+
+    public static int speed = 15;
+    public int speedHandler()
+    {
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+            if (speed == 50)
+            {
+                speed = 50;
+            }
+            else
+            {
+                speed += 5;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            if (speed == 15)
+            {
+                speed = 15;
+            }
+            else
+            {
+                speed -= 5;
+            }
+        }
+        Debug.Log(speed);
+        return speed;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-         transform.Translate(Vector3.left * speed * Time.deltaTime);
 
-    if (transform.position.x <= -4)
-    {
-        transform.Translate(Vector3.right * speed * Time.deltaTime);
-        Debug.Log("Working!");
-    }
+
+
+        horizontalInput = Input.GetAxis("Horizontal");
+
+        transform.Translate(Vector3.forward * speedHandler() * Time.deltaTime);
+
+        transform.Rotate(Vector3.up * turnspeed * Time.deltaTime * horizontalInput);
+
 
     }
 }
