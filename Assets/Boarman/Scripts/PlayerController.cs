@@ -1,26 +1,62 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI; 
-
 
 public class PlayerController : MonoBehaviour
 {
+    private float turnspeed = 45.0f;
+    private float horizontalInput;
 
-    public float CurrentTime = 5;
-    public float MaxTime = 5;
-    public text FuelText;
-    public Image FuelImage;
+
+    public static int speed = 15;
+    public int speedHandler()
+    {
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+            if (speed == 50)
+            {
+                speed = 50;
+            }
+            else
+            {
+                speed += 5;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            if (speed == 15)
+            {
+                speed = 15;
+            }
+            else
+            {
+                speed -= 5;
+            }
+        }
+        Debug.Log(speed);
+        return speed;
+    }
     // Start is called before the first frame update
-    void Update(){
-        UpdateUI();
+    void Start()
+    {
 
     }
 
-    public void UpdateUI(){
+    // Update is called once per frame
+    void Update()
+    {
 
-        FuelImage.fillAmount = CurrentTime / MaxTime;
-        FuelText.text = "Fuel: " + (CurrentTime / MaxTime).ToString();
 
-    }//ui for fuel
+
+        horizontalInput = Input.GetAxis("Horizontal");
+
+        transform.Translate(Vector3.forward * speedHandler() * Time.deltaTime);
+
+        transform.Rotate(Vector3.up * turnspeed * Time.deltaTime * horizontalInput);
+
+
+    }
 }
