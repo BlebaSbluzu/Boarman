@@ -10,6 +10,7 @@ public class FollowPlayerX : MonoBehaviour
      public GameObject Car;
 
 
+
         // The consistent offest we want to keep from the car 
     private Vector3 offset = new Vector3(0,6,-8.5f);
 
