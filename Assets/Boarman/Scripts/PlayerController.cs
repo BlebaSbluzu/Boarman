@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+
+    bool alive = true;
+
     private float turnspeed = 45.0f;
     private float horizontalInput;
 
@@ -16,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
+            
             if (speed == 50)
             {
                 speed = 50;
@@ -40,6 +45,20 @@ public class PlayerController : MonoBehaviour
         return speed;
     }
     // Start is called before the first frame update
+
+    private void FixedUpdate()
+    {
+        if (!alive) return;
+    }
+    private void LateUpdate()
+    {
+        if (transform.position.y < -5)
+        {
+            Die();
+        }
+    }
+
+
     void Start()
     {
 
@@ -59,4 +78,16 @@ public class PlayerController : MonoBehaviour
 
 
     }
+
+ public void Die()
+    {
+        alive = false;
+
+       Invoke ("Restart", 0);
+    }
+    void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
 }
