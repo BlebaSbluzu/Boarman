@@ -7,6 +7,7 @@ public class NewBehaviourScript : MonoBehaviour
     void Start()
     {
         groundSpawner = GameObject.FindObjectOfType<GroundSpawner>();
+        SpawnObstacle();
     
     }
 
@@ -18,5 +19,15 @@ public class NewBehaviourScript : MonoBehaviour
     private void Update()
     {
         
+    }
+    public GameObject obstaclePrefab;
+
+    void SpawnObstacle()
+    {
+     int obstacleSpawnIndex = Random.Range(2,5);
+
+     Transform spawnPoint = transform.GetChild(obstacleSpawnIndex).transform;
+
+     Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity, transform);
     }
 }
