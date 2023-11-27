@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -85,7 +87,21 @@ public class PlayerController : MonoBehaviour
 
        Invoke ("Restart", 0);
     }
-    void Restart()
+    public TextMeshProUGUI gameOverText;
+public Button restartButton; 
+public bool isGameActive;
+
+
+
+public void GameOver()
+    {
+        gameOverText.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
+        isGameActive = false;
+    }
+
+    // Restart game by reloading the scene
+    public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
